@@ -89,11 +89,11 @@ void armsExtend() {
   //maestroL.setTarget(0, 6800); // wrist L SERVO
   maestroB.setTarget(1, 6500); // elbow R
   maestroB.setTarget(2, 6500); // elbow L
+  //maestroB.setTarget(5, 5600); // ToShell R
+  //maestroB.setTarget(6, 5600); // ToShell L
   maestroB.setTarget(0, 7800); // splay
   //maestroB.setTarget(3, 7800); // wing R
   //maestroB.setTarget(4, 7800); // wing L
-  //maestroB.setTarget(5, 5600); // ToShell R
-  //maestroB.setTarget(6, 5600); // ToShell L
   toggle = HIGH;
 }
 

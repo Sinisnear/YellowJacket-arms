@@ -68,9 +68,11 @@ void armsExtend() {
   maestroB.setSpeed(2, 128); // elbow L
   maestroB.setSpeed(3, 0); // wing R
   maestroB.setSpeed(4, 0); // wing L
-  
+  maestroB.setSpeed(5, 128); // TopShell R
+  maestroB.setSpeed(6, 128); // TopShell L
   maestroR.setAcceleration(1, 128);
   maestroL.setAcceleration(1, 128);
+  
   // small number is out, big number is in
   // L16 full stroke is 4000-8200 us (microseconds)
   // limit for twisting elbow is 4000-10000us
@@ -93,6 +95,8 @@ void armsExtend() {
   maestroB.setTarget(0, 7800); // splay
   //maestroB.setTarget(3, 7800); // wing R
   //maestroB.setTarget(4, 7800); // wing L
+  //maestroB.setTarget(5, 5600); // ToShell R
+  //maestroB.setTarget(6, 5600); // ToShell L
   toggle = HIGH;
 }
 
@@ -114,7 +118,9 @@ void armsContract() {
   maestroB.setSpeed(2, 128); // elbow L
   maestroB.setSpeed(3, 0); // wing R
   maestroB.setSpeed(4, 0); // wing L
-
+  maestroB.setSpeed(5, 128); // TopShell R
+  maestroB.setSpeed(6, 128); // TopShell L
+  
   //maestroB.setTarget(4, 7800); // wingR
   //maestroB.setTarget(5, 7800); // wingL
   //delay(1000); // ??? do i need this delay ???
@@ -131,6 +137,8 @@ void armsContract() {
   //delay(1000);
   maestroR.setTarget(0, 4000); // lower
   maestroL.setTarget(0, 4000); // lower
+  //maestroB.setTarget(5, 5600); // ToShell R
+  //maestroB.setTarget(6, 5600); // ToShell L
   maestroB.setTarget(1, 7900); // elbow R
   maestroB.setTarget(2, 7900); // elbow L
   maestroB.setTarget(1, 5200); // splay

@@ -1,10 +1,14 @@
 #include <PololuMaestro.h>
 #include <Adafruit_NeoPixel.h>
 
-/* On boards with a hardware serial port available for use, use
-that port to communicate with the Maestro. For other boards,
-create a SoftwareSerial object using pin 10 to receive (RX) and
-pin 11 to transmit (TX). */
+/* NeoPixel */
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+#define PIN 6
+// set number of (neopxels in chain, PIN, pixel_type + speed)
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(180, PIN, NEO_GRB + NEO_KHZ800);
+
 #ifdef SERIAL_PORT_HARDWARE_OPEN
   #define maestroSerialB SERIAL_PORT_HARDWARE_OPEN
   #define maestroSerialL SERIAL_PORT_HARDWARE_OPEN
@@ -15,13 +19,6 @@ pin 11 to transmit (TX). */
   SoftwareSerial maestroSerialL(7, 8);
   SoftwareSerial maestroSerialR(9, 10);
 #endif
-
-/* NeoPixel */
-#ifdef __AVR__
-  #include <avr/power.h>
-#endif
-#define PIN 6
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(180, PIN, NEO_GRB + NEO_KHZ800);
 
 /* button */
 const int buttonShootPin = 2;     // the number of the pushbutton pin
@@ -53,13 +50,13 @@ void setup()
 void armsExtend() {
   // Channel, speed 0 = unlimited, 1 slow, 255 fast
   // arm right
-  maestroR.setSpeed(0, 0); // lower
-  maestroR.setSpeed(1, 7); // wrist
+  maestroR.setSpeed(0, 7); // wrist
+  maestroR.setSpeed(1, 0); // lower
   maestroR.setSpeed(2, 128); // arm 2.5 PQ12
   maestroR.setSpeed(3, 128); // tip PQ12
   // arm left
-  maestroL.setSpeed(0, 0); // lower
-  maestroL.setSpeed(1, 7); // wrist
+  maestroL.setSpeed(0, 7); // wrist
+  maestroL.setSpeed(1, 0); // lower
   maestroL.setSpeed(2, 128); // arm 2.5 PQ12
   maestroL.setSpeed(3, 128); // tip PQ12
   // backpack
@@ -80,16 +77,16 @@ void armsExtend() {
   // top max 8500 low 5600 mid 7100
   // bottom max 2450 low 5600 mid 3900
   
-  maestroR.setTarget(0, 6000); // lower
-  maestroL.setTarget(0, 6000); // lower
+  maestroR.setTarget(1, 6000); // lower
+  maestroL.setTarget(1, 6000); // lower
   maestroR.setTarget(3, 7000); // tip PQ12
   maestroL.setTarget(3, 7000); // tip PQ12
   maestroR.setTarget(2, 4000); // arm 2.5 PQ12
   maestroL.setTarget(2, 4000); // arm 2.5 PQ12
   delay(1000);
-  //maestroR.setTarget(1, 10000); // wrist R SERVO
-  maestroR.setTarget(1, 6800); // wrist R SERVO
-  //maestroL.setTarget(1, 6800); // wrist L SERVO
+  //maestroR.setTarget(0, 10000); // wrist R SERVO
+  maestroR.setTarget(0, 6800); // wrist R SERVO
+  //maestroL.setTarget(0, 6800); // wrist L SERVO
   maestroB.setTarget(1, 6500); // elbow R
   maestroB.setTarget(2, 6500); // elbow L
   maestroB.setTarget(0, 7800); // splay

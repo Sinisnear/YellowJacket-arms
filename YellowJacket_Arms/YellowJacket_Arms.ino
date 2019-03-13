@@ -84,7 +84,7 @@ void armsExtend() {
   maestroR.setTarget(2, 4000); // arm 2.5 PQ12
   maestroL.setTarget(2, 4000); // arm 2.5 PQ12
   delay(1000);
-  //maestroR.setTarget(0, 10000); // wrist R SERVO
+      //maestroR.setTarget(0, 10000); // wrist R SERVO
   maestroR.setTarget(0, 6800); // wrist R SERVO
   //maestroL.setTarget(0, 6800); // wrist L SERVO
   maestroB.setTarget(1, 6500); // elbow R
@@ -93,7 +93,7 @@ void armsExtend() {
   //maestroB.setTarget(6, 5600); // ToShell L
   maestroB.setTarget(0, 7800); // splay
   //maestroB.setTarget(3, 7800); // wing R
-  //maestroB.setTarget(4, 7800); // wing L
+  maestroB.setTarget(4, 7800); // wing L
   toggle = HIGH;
 }
 
@@ -118,8 +118,8 @@ void armsContract() {
   maestroB.setSpeed(5, 128); // TopShell R
   maestroB.setSpeed(6, 128); // TopShell L
   
-  //maestroB.setTarget(4, 7800); // wingR
-  //maestroB.setTarget(5, 7800); // wingL
+  //maestroB.setTarget(3, 7800); // wingR
+  maestroB.setTarget(4, 7800); // wingL
   //delay(1000); // ??? do i need this delay ???
   //maestroR.setTarget(1, 1800); // wrist SERVO
   maestroR.setTarget(1, 4600); // wrist SERVO
@@ -138,7 +138,7 @@ void armsContract() {
   //maestroB.setTarget(6, 5600); // ToShell L
   maestroB.setTarget(1, 7900); // elbow R
   maestroB.setTarget(2, 7900); // elbow L
-  maestroB.setTarget(1, 5200); // splay
+  maestroB.setTarget(0, 5200); // splay
   toggle = LOW;
 }
 

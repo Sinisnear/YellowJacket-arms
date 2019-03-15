@@ -82,14 +82,14 @@ void armsExtend() {
   
   maestroR.setTarget(1, 6000); // lower
   maestroL.setTarget(1, 6000); // lower
-  maestroR.setTarget(3, 7000); // tip PQ12
-  maestroL.setTarget(3, 7000); // tip PQ12
-  maestroR.setTarget(2, 4000); // arm 2.5 PQ12
-  maestroL.setTarget(2, 4000); // arm 2.5 PQ12
+  maestroR.setTarget(3, 4400 ); // tip PQ12
+  maestroL.setTarget(3, 4400 ); // tip PQ12
+  maestroR.setTarget(2, 7800 ); // arm 2.5 PQ12
+  maestroL.setTarget(2, 7800 ); // arm 2.5 PQ12
   delay(1000);
       //maestroR.setTarget(0, 10000); // wrist R SERVO
-  maestroR.setTarget(0, 6800); // wrist R SERVO
-  //maestroL.setTarget(0, 6800); // wrist L SERVO
+  maestroR.setTarget(0, 10000); // wrist R SERVO
+  maestroL.setTarget(0, 9000); // wrist L SERVO
   maestroB.setTarget(1, 6500); // elbow R
   maestroB.setTarget(2, 6500); // elbow L
   maestroB.setTarget(5, 3850); // TopShell R
@@ -104,13 +104,13 @@ void armsExtend() {
 void armsContract() {
 // Channel, speed 0 = unlimited, 1 slow, 255 fast
   // arm right
-  maestroR.setSpeed(0, 0); // lower
-  maestroR.setSpeed(1, 20); // wrist
+  maestroR.setSpeed(0, 20); // wrist
+  maestroR.setSpeed(1, 0); // lower
   maestroR.setSpeed(2, 128); // arm 2.5 PQ12
   maestroR.setSpeed(3, 128); // tip PQ12
   // arm left
-  maestroL.setSpeed(0, 0); // lower
-  maestroL.setSpeed(1, 20); // wrist
+  maestroL.setSpeed(0, 20); // wrist
+  maestroL.setSpeed(1, 0); // lower
   maestroL.setSpeed(2, 128); // arm 2.5 PQ12
   maestroL.setSpeed(3, 128); // tip PQ12
   // backpack
@@ -125,19 +125,19 @@ void armsContract() {
   maestroB.setTarget(3, 4500); // wingR
   maestroB.setTarget(4, 4500); // wingL
   delay(1500); // so that wings go in first
-  //maestroR.setTarget(1, 1800); // wrist SERVO
-  maestroR.setTarget(1, 4600); // wrist SERVO
-  maestroL.setTarget(1, 4600); // wrist SERVO
+  //maestroB.setTarget(17, 10000); // wrist SERVO
+  maestroR.setTarget(0, 8500); // wrist SERVO
+  maestroL.setTarget(0, 10000); // wrist SERVO
   delay(1000);
-  
-  maestroR.setTarget(2, 7800 ); // arm 2.5 PQ12
-  maestroL.setTarget(2, 7800 ); // arm 2.5 PQ12
+  maestroR.setTarget(2, 4000); // arm 2.5 PQ12
+  maestroL.setTarget(2, 4000); // arm 2.5 PQ12
    //delay(1000);
-  maestroR.setTarget(3, 4400 ); // tip PQ12
-  maestroL.setTarget(3, 4400 ); // tip PQ12
+  
+  maestroR.setTarget(3, 7000); // tip PQ12
+  maestroL.setTarget(3, 7000); // tip PQ12
   //delay(1000);
-  maestroR.setTarget(0, 4000); // lower
-  maestroL.setTarget(0, 4000); // lower
+  maestroR.setTarget(1, 4000); // lower
+  maestroL.setTarget(1, 4000); // lower
   maestroB.setTarget(5, 5450); // TopShell R
   maestroB.setTarget(6, 5450); // TopShell L
   maestroB.setTarget(1, 7900); // elbow R

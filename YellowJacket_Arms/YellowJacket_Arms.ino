@@ -21,8 +21,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(180, PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
 /* button */
-const int buttonShootPin = 2;     // the number of the pushbutton pin
-const int buttonArmsPin = 3;     // the number of the pushbutton pin
+const int buttonShootPin = 3;     // the number of the pushbutton pin
+const int buttonArmsPin = 4;     // the number of the pushbutton pin
 int buttonShootState = LOW;
 int buttonArmsState = LOW;
 int toggle = LOW;
@@ -43,7 +43,10 @@ void setup()
   strip.show(); // Initialize all pixels to 'off'
   pinMode(buttonShootPin, INPUT);
   pinMode(buttonArmsPin, INPUT);
-  //Serial.begin(9600);
+  
+  // serial output for serial monitor
+  Serial.begin(9600);
+  
   armsContract();
 }
 
@@ -65,8 +68,8 @@ void armsExtend() {
   maestroB.setSpeed(2, 128); // elbow L
   maestroB.setSpeed(3, 0); // wing R
   maestroB.setSpeed(4, 0); // wing L
-  maestroB.setSpeed(5, 128); // TopShell R
-  maestroB.setSpeed(6, 128); // TopShell L
+  maestroB.setSpeed(5, 10); // TopShell R
+  maestroB.setSpeed(6, 10); // TopShell L
   maestroR.setAcceleration(1, 128);
   maestroL.setAcceleration(1, 128);
   
@@ -89,11 +92,12 @@ void armsExtend() {
   //maestroL.setTarget(0, 6800); // wrist L SERVO
   maestroB.setTarget(1, 6500); // elbow R
   maestroB.setTarget(2, 6500); // elbow L
-  //maestroB.setTarget(5, 5600); // ToShell R
-  //maestroB.setTarget(6, 5600); // ToShell L
+  maestroB.setTarget(5, 3850); // TopShell R
+  maestroB.setTarget(6, 3850); // TopShell L
   maestroB.setTarget(0, 7800); // splay
-  //maestroB.setTarget(3, 7800); // wing R
-  maestroB.setTarget(4, 7800); // wing L
+  delay(2300); // so that wings go out last
+  maestroB.setTarget(3, 6300); // wing R
+  maestroB.setTarget(4, 6300); // wing L
   toggle = HIGH;
 }
 
@@ -115,12 +119,12 @@ void armsContract() {
   maestroB.setSpeed(2, 128); // elbow L
   maestroB.setSpeed(3, 0); // wing R
   maestroB.setSpeed(4, 0); // wing L
-  maestroB.setSpeed(5, 128); // TopShell R
-  maestroB.setSpeed(6, 128); // TopShell L
+  maestroB.setSpeed(5, 10); // TopShell R
+  maestroB.setSpeed(6, 10); // TopShell L
   
-  //maestroB.setTarget(3, 7800); // wingR
-  maestroB.setTarget(4, 7800); // wingL
-  //delay(1000); // ??? do i need this delay ???
+  maestroB.setTarget(3, 4500); // wingR
+  maestroB.setTarget(4, 4500); // wingL
+  delay(1500); // so that wings go in first
   //maestroR.setTarget(1, 1800); // wrist SERVO
   maestroR.setTarget(1, 4600); // wrist SERVO
   maestroL.setTarget(1, 4600); // wrist SERVO
@@ -134,8 +138,8 @@ void armsContract() {
   //delay(1000);
   maestroR.setTarget(0, 4000); // lower
   maestroL.setTarget(0, 4000); // lower
-  //maestroB.setTarget(5, 5600); // ToShell R
-  //maestroB.setTarget(6, 5600); // ToShell L
+  maestroB.setTarget(5, 5450); // TopShell R
+  maestroB.setTarget(6, 5450); // TopShell L
   maestroB.setTarget(1, 7900); // elbow R
   maestroB.setTarget(2, 7900); // elbow L
   maestroB.setTarget(0, 5200); // splay
@@ -192,7 +196,10 @@ void loop() {
       }
     }
   }
-
+  
+  // output stuff to serial monitor
+  //Serial.print(buttonArmsState);Serial.println();
+  
   // ARM CONTROL
   // EXTEND
   if (buttonArmsState == HIGH && toggle == LOW) {

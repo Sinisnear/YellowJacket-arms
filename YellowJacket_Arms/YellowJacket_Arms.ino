@@ -45,7 +45,7 @@ void setup()
   pinMode(buttonArmsPin, INPUT);
   
   // serial output for serial monitor
-  Serial.begin(9600);
+  //Serial.begin(9600);
   
   armsContract();
 }
@@ -80,24 +80,25 @@ void armsExtend() {
   // top max 8500 low 5600 mid 7100
   // bottom max 2450 low 5600 mid 3900
   
-  maestroR.setTarget(1, 6000); // lower
-  maestroL.setTarget(1, 6000); // lower
+  maestroR.setTarget(1, 5900); // lower
+  maestroL.setTarget(1, 6100); // lower
+  maestroB.setTarget(0, 7800); // splay new
+  delay(150); // splay new
   maestroR.setTarget(3, 4400 ); // tip PQ12
   maestroL.setTarget(3, 4400 ); // tip PQ12
   maestroR.setTarget(2, 7800 ); // arm 2.5 PQ12
   maestroL.setTarget(2, 7800 ); // arm 2.5 PQ12
-  delay(1000);
+  delay(300); // old delay 1000
       //maestroR.setTarget(0, 10000); // wrist R SERVO
   maestroR.setTarget(0, 10000); // wrist R SERVO
-  maestroL.setTarget(0, 9000); // wrist L SERVO
-  maestroB.setTarget(1, 6500); // elbow R
-  maestroB.setTarget(2, 6500); // elbow L
+  maestroL.setTarget(0, 8500); // wrist L SERVO
+  maestroB.setTarget(1, 6300); // elbow R
+  maestroB.setTarget(2, 6300); // elbow L
   maestroB.setTarget(5, 3850); // TopShell R
   maestroB.setTarget(6, 3850); // TopShell L
-  maestroB.setTarget(0, 7800); // splay
-  delay(2300); // so that wings go out last
-  maestroB.setTarget(3, 6300); // wing R
-  maestroB.setTarget(4, 6300); // wing L
+  // old splay
+  delay(1500); // so that wings go out last
+  maestroB.setTarget(3, 6300); // wing R/L
   toggle = HIGH;
 }
 
@@ -117,18 +118,17 @@ void armsContract() {
   maestroB.setSpeed(0, 10); // splay
   maestroB.setSpeed(1, 128); // elbow R 
   maestroB.setSpeed(2, 128); // elbow L
-  maestroB.setSpeed(3, 0); // wing R
-  maestroB.setSpeed(4, 0); // wing L
+  maestroB.setSpeed(3, 0); // wing R/L
   maestroB.setSpeed(5, 10); // TopShell R
   maestroB.setSpeed(6, 10); // TopShell L
   
   maestroB.setTarget(3, 4500); // wingR
   maestroB.setTarget(4, 4500); // wingL
-  delay(1500); // so that wings go in first
+  delay(800); // so that wings go in first
   //maestroB.setTarget(17, 10000); // wrist SERVO
   maestroR.setTarget(0, 8500); // wrist SERVO
   maestroL.setTarget(0, 10000); // wrist SERVO
-  delay(1000);
+  delay(800);
   maestroR.setTarget(2, 4000); // arm 2.5 PQ12
   maestroL.setTarget(2, 4000); // arm 2.5 PQ12
    //delay(1000);
@@ -140,8 +140,8 @@ void armsContract() {
   maestroL.setTarget(1, 4000); // lower
   maestroB.setTarget(5, 5450); // TopShell R
   maestroB.setTarget(6, 5450); // TopShell L
-  maestroB.setTarget(1, 7900); // elbow R
-  maestroB.setTarget(2, 7900); // elbow L
+  maestroB.setTarget(1, 8200); // elbow R
+  maestroB.setTarget(2, 8200); // elbow L
   maestroB.setTarget(0, 5200); // splay
   toggle = LOW;
 }
